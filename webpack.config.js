@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './app.js',
+  entry: ['./app.js', './app.css'],
   module: {
     rules: [
         { test: /\.css$/, use: ['style-loader', 'css-loader'] },
@@ -10,7 +10,7 @@ module.exports = {
     ]
   },
   output: {
-      path: path.resolve(__dirname),
+      path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js'
   },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development'
