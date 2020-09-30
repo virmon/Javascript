@@ -39,7 +39,11 @@ let getHumanData = (function () {
         } else {
             removeForm();
             human.name = document.getElementById('name').value;
-            human.height = parseInt(document.getElementById('inches').value);
+            if (document.getElementById('feet').value === '') {
+                human.height = parseInt(document.getElementById('inches').value);
+            } else {
+                human.height = parseInt(document.getElementById('feet').value);
+            }
             human.weight = parseInt(document.getElementById('weight').value);
             human.diet = document.getElementById('diet').value;
             compareFacts();
@@ -160,11 +164,25 @@ function getRandomInt(min, max) {
 
 function validInput() {
     let name = document.getElementById('name').value;
-    let height = parseInt(document.getElementById('inches').value);
+    let feet = parseInt(document.getElementById('feet').value);
+    let inches = parseInt(document.getElementById('inches').value);
     let weight = parseInt(document.getElementById('weight').value);
     let diet = document.getElementById('diet').value;
-    if (!name || !height || !weight || !diet) {
+    if (!name || !inches || !feet || !weight || !diet) {
         return false;
     }
     return true;
 }
+
+document.getElementById('feet').addEventListener('change', function () {
+    document.getElementById('inches').value = " ";
+    let feet = document.getElementById('feet').value;
+    let inches = document.getElementById('inches').value;
+    document.getElementById('inches').value = feet * 12 + inches;
+})
+
+document.getElementById('inches').addEventListener('change', function () {
+    document.getElementById('feet').value = " ";
+    let inches = document.getElementById('inches').value;
+    document.getElementById('feet').value = inches / 12;
+})
