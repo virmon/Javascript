@@ -58,12 +58,12 @@ Creature.prototype.compareHeight = function () {
     let diff = 0;
     if (this.height > human.height) {
         diff = this.height - human.height;
-        this.fact.push(`${this.species} is taller than you in ${diff} inches`);
+        this.fact.push(`${this.species} is taller than ${human.name} in ${diff} inches`);
     } else if (this.height < human.height) {
         diff = human.height - this.height;
-        this.fact.push(`You are taller in ${diff} inches`);
+        this.fact.push(`${human.name} is taller than ${this.species} in ${diff} inches`);
     } else {
-        this.fact.push(`You have the same height!`);
+        this.fact.push(`${human.name} and ${this.species} have the same height of ${this.height}!`);
     }
 }
 
@@ -73,12 +73,12 @@ Creature.prototype.compareWeight = function () {
     let diff = 0;
     if (this.weight > human.weight) {
         diff = this.weight - human.weight;
-        this.fact.push(`${this.species} is heavier than you in ${diff} lbs`);
+        this.fact.push(`${this.species} is heavier than ${human.name} in ${diff} lbs`);
     } else if (this.weight < human.weight) {
         diff = human.weight - this.weight;
-        this.fact.push(`You are heavier in ${diff} lbs`);
+        this.fact.push(`${human.name} is heavier than ${this.species} in ${diff} lbs`);
     } else {
-        this.fact.push(`You have the same weight!`);
+        this.fact.push(`Both ${human.name} and ${this.species} have the same weight of ${this.weight}!`);
     }
 }
 
@@ -86,9 +86,9 @@ Creature.prototype.compareWeight = function () {
 // NOTE: Weight in JSON file is in lbs, height in inches.
 Creature.prototype.compareDiet = function () {
     if (this.diet.toLowerCase() === human.diet.toLowerCase()) {
-        this.fact.push(`Both of you are ${this.diet}`);
+        this.fact.push(`Both ${human.name} and ${this.species} are ${this.diet}`);
     } else {
-        this.fact.push(`${this.species} are ${this.diet}`);
+        this.fact.push(`${this.species} are ${this.diet} while ${human.name} is ${human.diet}`);
     }
 }
 
@@ -98,8 +98,8 @@ Creature.prototype.compareDiet = function () {
 function generateGrid() {
     // insert human into dinoData array
     dinoData.splice(4, 0, human);
-    let i = getRandomInt(0, dinoData[0].fact.length - 1);
     dinoData.map(data => {
+        let i = getRandomInt(0, dinoData[0].fact.length - 1);
         addTiles(data, i);
     })
 }
